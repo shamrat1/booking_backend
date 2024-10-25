@@ -28,4 +28,5 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/mechanics',[BookingController::class,'getMechanics']);
     Route::get('/bookings',[BookingController::class,'index']);
     Route::post('/booking/create',[BookingController::class,'store']);
+    Route::post('/booking/{id}/update',[BookingController::class,'update']);
 });

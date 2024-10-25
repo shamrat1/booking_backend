@@ -57,22 +57,13 @@ class BookingController extends Controller {
         return $randomString;
     }
     
-    public function update(Request $request,int $bookingID) {
+    public function update(Request $request,int $id) {
         
         $validated = $request->validate([
-            'car_make' => 'required|string',
-            'car_model' => 'required|string',
-            'car_year' => 'required|integer',
-            'registration_plate' => 'required|string',
-            'customer_name' => 'required|string',
-            'customer_phone' => 'required|string',
-            'customer_email' => 'required|string|email',
-            'booking_title' => 'required|string',
-            'start_datetime' => 'required|date',
-            'end_datetime' => 'required|date',
+            'status' => 'required',
             'mechanic_id' => 'required|exists:users,id',
         ]);
-        $booking = Booking::find($bookingID);
+        $booking = Booking::find($id);
         $booking->update($validated);
         return response()->json($booking, 200);
     }
