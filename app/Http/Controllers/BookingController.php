@@ -11,14 +11,16 @@ class BookingController extends Controller {
 
     public function index(Request $request) {
         $user = auth('api')->user();
-        $start = $request->start ?? now()->startOfMonth();
-        $end = $request->end ?? now()->endOfMonth();
+        // $start = $request->start ?? now()->startOfMonth();
+        // $end = $request->end ?? now()->endOfMonth();
         if($user->role == 'admin'){
-            return Booking::orderBy('created_at','desc')->whereBetween('start_datetime',[$start,$end])->get();
+            return Booking::orderBy('created_at','desc')
+            // ->whereBetween('start_datetime',[$start,$end])
+            ->get();
 
-        }else{
+        }else{ 
             return Booking::where('mechanic_id', auth()->id())
-            ->whereBetween('start_datetime',[$start,$end])
+            // ->whereBetween('start_datetime',[$start,$end])
             ->orderBy('created_at','desc')
             ->get();
         }
